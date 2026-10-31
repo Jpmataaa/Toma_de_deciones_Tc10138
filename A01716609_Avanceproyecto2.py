@@ -1,23 +1,66 @@
 import random
 #https://github.com/juanmatap12-glitch/Take-of-decisions.git
-def evaluacion_1(): #En esta funcion se sumaron todos los valores que se le asignan a la variable de la opcion 1
-    puntuacion_beneficio1 = beneficio_1 + beneficio_2 + beneficio_3 + beneficio_4 + beneficio_5 + beneficio_6 + beneficio_7 + beneficio_8 + beneficio_9 + beneficio_10  #el puntaje de cada beneficio
-    puntuacion_riesgo2 = riesgo_1 + riesgo_2 + riesgo_3 + riesgo_4 + riesgo_5 + riesgo_6 + riesgo_7 + riesgo_7 + riesgo_8 + riesgo_9 + riesgo_10 #el puntaje de riesgo
+def operaciones(opcion_1, opcion_2): #En esta funcion se sumaron todos los valores que se le asignan a la variable de la opcion 1
+    preguntas = [
+    "Impacto a corto plazo: ¿Qué nivel de tranquilidad inmediata te dará elegir esta opción en los próximos 10 días?",
+    "Impacto a mediano plazo: ¿Qué tanto bienestar general te aportará en los próximos 10 meses?",
+    "Impacto a largo plazo: ¿Qué tan orgulloso te sentirás de haber tomado esta decisión dentro de 10 años?",
+    "Autenticidad: ¿Qué tanto se alinea este camino con tus valores principales y quien realmente eres?",
+    "Crecimiento: ¿Qué tanto esta elección está impulsada por el deseo de crecer, en lugar del miedo a equivocarte?",
+    "Minimización de arrepentimiento: Si el escenario ideal no se cumple, ¿qué tan en paz estarás sabiendo que al menos lo intentaste?",
+    "Energía mental: ¿Cuánta energía vital y motivación genuina te aportará (en lugar de provocarte desgaste)?",
+    "Autonomía: ¿Qué tanto control mantienes sobre tu propia vida, tiempo e independencia si eliges esto?",
+    "Entorno social: ¿Qué tan positivo será el efecto de esta decisión en las relaciones que más te importan?",
+    "Intuición pura: Si lanzaras una moneda y el resultado te obligara a tomar esta opción, ¿cuánto alivio sentirías en ese primer segundo?",
+    "Costo de oportunidad: Al renunciar a las demás alternativas por tomar esta, ¿qué tanta tranquilidad sientes con lo que dejas ir?",
+    "Resiliencia: Si las cosas se complican, ¿qué tanta voluntad y capacidad sientes que tienes para enfrentar los obstáculos exclusivos de esta opción?"
+]
+    beneficio_1 = []
+    riesgo_1 = []
+    beneficio_2 = []
+    riesgo_2 = []
+    print(f"Califica las preguntas de acuerdo a {opcion_1} ")
+    for pregunta in preguntas:
+        print(pregunta)
+        puntaje = int(input("Dame el puntaje de beneficio"))
+        riesgo = 10 - puntaje
+        beneficio_1.append(puntaje)
+        riesgo_1.append(riesgo)
+    exito_1 = int(input("Del 1 al 100, ¿qué porcentaje de probabilidad crees que hay de que esta opción salga exactamente como quieres?")) / 100
+    fracaso_1 = 1.0 - exito_1
+    print(f"Ahora califica las preguntas de acuerdo a {opcion_2} ")    
+    for pregunta in preguntas:
+        print(pregunta)
+        puntaje = int(input("Dame el puntaje de beneficio"))
+        riesgo = 10 - puntaje
+        beneficio_2.append(puntaje)
+        riesgo_2.append(beneficio)
+    exito_2 = int(input("Del 1 al 100, ¿qué porcentaje de probabilidad crees que hay de que esta opción salga exactamente como quieres?")) / 100
+    fracaso_2 = 1.0 - exito_2
+    total_beneficio1 = sum(beneficio_1)
+    total_beneficio2 = sum(beneficio_2)
+    total_riesgo1 = sum(riesgo_1)
+    total_riesgo2 = sum(riesgo_2)
     
-def evaluacion_2(): #En esta funcio se sumaran todos los valores que se asignan a la variable de la opcion 2
+    valor_esperado_1 = (total_beneficio1 * exito_1) - (total_riesgo1 * fracaso_1)
+    valor_esperado_2 = (total_beneficio2 * exito_2) - (total_riesgo2 * fracaso_2)
+    
+    print("RESULTADOS")
+    if valor_esperado_1 > valor_esperado_2:
+        print(f"TU OPCION MAS VIABLE ES {opcion_1}, con la probabilidad de: ", valor_esperado_1)
+    elif valor_esperado_1 < valor_esperado_2:
+        print(f"TU OPCION MAS VIABLE ES {opcion_2}, con la probabilidad de: ", valor_esperado_2)
+    else:
+        print("Las probabilidades son iguales")
+        
+    
     
     
     
 def recursos():# aqui inclui algunos recursos psicologicos gratuitos
-    print("Estos son algunos recursos que te pueden ayudar si estas pasando por problemas emocionales o quieres hablar sobre algun tema")
-    print("Ayuda psicologia sejuve:")
-    print("Para llamadas: 442-224-2254, para mensajes: 442-144-3740")
-    print("Linea de la vida")
-    print("800-911-2000")
-    print("Simisae")
-    print("800-911-3232")
-    
-    
+    recursos = ["Instituto para Prevenir Conductas de Riesgo: 070 / 442-238-7770", "auxiliospsicologicos.municipiodequeretaro.gob.mx, DIF Estatal Querétaro: 442-238-5000", "Consejo Estatal Contra las Adicciones (CECA): 442-212-0408", "Instituto Queretano de las Mujeres: 442-215-3404, Línea de la Vida: 800-911-2000", "Secretaría de la Juventud (SEJUVE): 442-144-3740"]
+    for resource in recursos:
+        print(resource)
 
 def consejo():#aqui inclui una serie de consejos y use el random para que sea como un consejo de la galleta de fortuna
     
@@ -61,21 +104,12 @@ def main():
                     recursos()
                 case 2:
                     # aqui comenze con el programa principal que es la ayuda para tomar decisiones 
-                    desicion = str(input("¿Cual es la decision que debes tomar"))
-                    opcion_1 = str(input("Dame tu primera opcion"))
-                    opcion_2 = str(input("Dame tu segunda opcion"))
+                    desicion = (input("¿Cual es la decision que debes tomar"))
+                    opcion_1 = (input("Dame tu primera opcion"))
+                    opcion_2 = (input("Dame tu segunda opcion"))
                     print("Iniciando serie de preguntas")
                     print("A cada pregunta asignale un valor del 1 al 10 de acuerdo al beneficio que te traiga") #aqui quiero ir dando preguntas y que el puntaje se le sume al buntaje de beneficio
-                    print("Opción 1: ¿Qué tanto bienestar te aportará esta opción en los próximos 10 meses?") 
-                    beneficio_1 = int(input("Beneficio:")) 
-                    riesgo_1 =  10 - beneficio_1
-                    print("Opción 2: Si no eliges la Opción 1 por tomar esta, ¿qué tanto te pesará dentro de 10 meses?")#voy a ir haciendo lo mismo del puntaje con cada pregunta de cada opcion
-                    beneficio_2 = int(input("Beneficio:"))
-                    riesgo_2 = 10 - beneficio_2
-
-                    
-                    
-                    
+                    operaciones(opcion_1, opcion_2)
         
                 case 3:
                     consejo()
